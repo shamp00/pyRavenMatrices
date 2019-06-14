@@ -23,7 +23,7 @@ elements to or removal of elements from figures.
 
 import copy
 from typing import Callable, Any, List, cast
-
+import pyRavenMatrices.element as elt 
 
 class Target(object):
     
@@ -62,7 +62,7 @@ class Target(object):
         
         target = element
         if self.parent is not None:
-            target = parent(element)
+            target = self.parent(element)
         if self.attribute is not None:
             target = getattr(target, self.attribute)
         if self.index is not None:

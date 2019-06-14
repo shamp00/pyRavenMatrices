@@ -5,7 +5,7 @@ with open("readme.md", "r") as fh:
 
 setuptools.setup(
     name="pyRavenMatrices",
-    version="0.1.0",
+    version="0.1.1",
     author="Can Serif Mekik",
     author_email="can.mekik@gmail.com",
     description="Create problems in the style of Raven's Matrices.",
