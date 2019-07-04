@@ -213,16 +213,28 @@ def shading(element, lightness=.5):
 def numerosity(element, number=5):
     
     def wrapped(ctx, cell_structure, *args, **kwargs):
+        if i > 4:
+            for i in range(number):
+                
+                x = (i % 3) * (cell_structure.width / 3.)
+                y = (i // 3) * (cell_structure.height / 3.)
+                
+                ctx.save()
+                ctx.translate(x, y)
+                ctx.scale(1 / 3, 1 / 3)
+                element(ctx, cell_structure, *args, **kwargs)
+                ctx.restore()
+        else:
+            for i in range(number):
+                
+                x = (i % 2) * (cell_structure.width / 2.)
+                y = (i // 2) * (cell_structure.height / 2.)
+                
+                ctx.save()
+                ctx.translate(x, y)
+                ctx.scale(1 / 2, 1 / 2)
+                element(ctx, cell_structure, *args, **kwargs)
+                ctx.restore()
 
-        for i in range(number):
-            
-            x = (i % 3) * (cell_structure.width / 3.)
-            y = (i // 3) * (cell_structure.height / 3.)
-            
-            ctx.save()
-            ctx.translate(x, y)
-            ctx.scale(1 / 3, 1 / 3)
-            element(ctx, cell_structure, *args, **kwargs)
-            ctx.restore()
     
     return wrapped

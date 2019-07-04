@@ -12,6 +12,6 @@ intelligence and cognitive science.
 
 ## Dependencies
 
-- `python` version >= 3.7.0.
+- `python` version >= 3.6.0.
 - `cairo`, a 2D vector graphics library written in `C`. 
 - `pycairo`, `python` bindings for `cairo`.
