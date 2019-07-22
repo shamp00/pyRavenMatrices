@@ -77,6 +77,7 @@ def triangle(ctx, cell_structure, r=1):
     ctx.line_to(width / 2., height / 2.)
     ctx.line_to(0, - height / 2.)
     ctx.line_to(- width / 2., height / 2.)
+    ctx.close_path()
     ctx.restore()
 
 
@@ -96,6 +97,7 @@ def rectangle(ctx, cell_structure, r = 2):
     ctx.line_to(width / 2., - height / 2.)
     ctx.line_to(- width / 2., - height / 2.)
     ctx.line_to(- width / 2., height / 2.)
+    ctx.close_path()
     ctx.restore()
 
 
@@ -117,6 +119,7 @@ def trapezoid(ctx, cell_structure, r=1):
     ctx.line_to(width / 4., - height / 2.)
     ctx.line_to(- width / 4., - height / 2.)
     ctx.line_to(- width / 2., height / 2.)
+    ctx.close_path()
     ctx.restore()
 
 
@@ -136,6 +139,7 @@ def diamond(ctx, cell_structure, r=1):
     ctx.line_to(0, - height / 2.)
     ctx.line_to(- width / 2., - height / 4.)
     ctx.line_to(0, height / 2.)
+    ctx.close_path()
     ctx.restore()
 
 
@@ -161,6 +165,7 @@ def tee(ctx, cell_structure, r=1):
     ctx.line_to(- width / 2., - height / 4.)
     ctx.line_to(- width / 6., - height / 4.)
     ctx.line_to(- width / 6., height / 2.)
+    ctx.close_path()
     ctx.restore()
 
 
@@ -213,28 +218,23 @@ def shading(element, lightness=.5):
 def numerosity(element, number=5):
     
     def wrapped(ctx, cell_structure, *args, **kwargs):
-        if i > 4:
-            for i in range(number):
-                
+        for i in range(number):
+            if i > 4:                
                 x = (i % 3) * (cell_structure.width / 3.)
                 y = (i // 3) * (cell_structure.height / 3.)
                 
                 ctx.save()
                 ctx.translate(x, y)
                 ctx.scale(1 / 3, 1 / 3)
-                element(ctx, cell_structure, *args, **kwargs)
-                ctx.restore()
-        else:
-            for i in range(number):
-                
+            else:                    
                 x = (i % 2) * (cell_structure.width / 2.)
                 y = (i // 2) * (cell_structure.height / 2.)
                 
                 ctx.save()
                 ctx.translate(x, y)
                 ctx.scale(1 / 2, 1 / 2)
-                element(ctx, cell_structure, *args, **kwargs)
-                ctx.restore()
+            element(ctx, cell_structure, *args, **kwargs)
+            ctx.restore()
 
     
     return wrapped
